@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzz.mapper.UserMapper">
+    <!--因为在sqlMapConfig.xml中配置了别名，所以直接写user就可以-->
+    <select id="queryUser" parameterType="map" resultType="int">
+         select id from dbuser where userName=#{userName} and password=#{password}
+     </select>
+
+    <insert id="addUser" parameterType="user" >
+     INSERT INTO  dbuser(
+ username,password,uName,sex,age,job,txurl
+ )VALUES (
+   #{userName},
+   #{password},
+   #{uName},
+   #{sex},
+   #{age},
+   #{job},
+   #{txurl}
+ )
+ </insert>
+
+    <update id="editUser" parameterType="user">
+        UPDATE dbuser
+        <set>
+            <if test="userName !=null and userName !='' ">
+                userName=#{userName},
+            </if>
+            <if test="password !=null and password !='' ">
+                password=#{password},
+            </if>
+            <if test="uName !=null and uName !='' ">
+                uName=#{uName},
+            </if>
+            <if test="sex !=null and sex !='' ">
+                sex=#{sex},
+            </if>
+            <if test="age !=null and age !='' ">
+                age=#{age},
+            </if>
+            <if test="job !=null and job !='' ">
+                job=#{job},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="checkuser" parameterType="String" resultType="int">
+         select count(*) from dbuser where userName=#{username}
+     </select>
+
+    <select id="getuser" parameterType="int" resultType="User">
+         select * from dbuser where id=#{id}
+     </select>
+
+    <select id="gettxurl" parameterType="int" resultType="String">
+         select txurl from dbuser where id=#{id}
+     </select>
+
+    <update id="edittx">
+        UPDATE dbuser
+        <set>
+            <if test="txurl !=null and txurl !='' ">
+                txurl=#{txurl}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+</mapper>

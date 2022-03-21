@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzz.mapper.RzMapper">
+    <select id="queryRznameList" resultType="Rz" parameterType="int">
+         select * from dbrz
+         where userid=#{userid}
+     </select>
+
+    <insert id="addRz" parameterType="Rz" >
+     INSERT INTO  dbrz(
+ userid,rzname,rztext,date1
+ )VALUES (
+   #{userid},
+   #{rzname},
+   #{rztext},
+   #{date1}
+ )
+ </insert>
+
+    <delete id="delRzbyid" parameterType="int">
+    DELETE FROM  dbrz where id=#{id}
+</delete>
+
+    <select id="countRz" parameterType="int" resultType="int">
+         select count(*) from dbrz where userid=#{userid}
+     </select>
+
+    <select id="queryRz" resultType="Rz" parameterType="int">
+         select * from dbrz
+         where id=#{id}
+     </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzz.mapper.ssMapper">
+    <select id="queryssList" resultType="ss" parameterType="int">
+         select * from dbss
+         where userid=#{userid}
+     </select>
+
+    <insert id="addss" parameterType="ss" >
+     INSERT INTO  dbss(
+ userid,sstext,date1
+ )VALUES (
+   #{userid},
+   #{sstext},
+   #{date1}
+ )
+ </insert>
+
+    <delete id="delssbyid" parameterType="int">
+    DELETE FROM  dbss where id=#{id}
+</delete>
+
+    <select id="countss" parameterType="int" resultType="int">
+         select count(*) from dbss where userid=#{userid}
+     </select>
+
+</mapper>
